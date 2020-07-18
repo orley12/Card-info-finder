@@ -50,7 +50,7 @@ class OcrDetectorProcessor internal constructor(
         graphicOverlay.clear()
         val items = detections!!.detectedItems
         for (i in 0 until items.size()) {
-            val item = items.valueAt(i)
+            val item: TextBlock = items.valueAt(i)
             if (item != null && item.value != null) {
                 if(item.value.toIntOrNull() is Int) {
                     ocrText = item.value
@@ -58,7 +58,8 @@ class OcrDetectorProcessor internal constructor(
                     val graphic = OcrGraphic(graphicOverlay, item)
                     graphicOverlay.add(graphic)
                     if(item.value.replace(" ", "").matches(Regex("^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})\$"))){
-
+                        val accurateCarNumber: String = item.value
+                        ocrText = accurateCarNumber
                     }
                 }
             }

@@ -47,7 +47,6 @@ class MainActivityTest {
         val result = Instrumentation.ActivityResult(Activity.RESULT_OK, resultData)
 
         // THEN -
-//        onView(withId(R.id.progress_bar)).check(matches(not(isDisplayed())))
         onView(withId(R.id.scan_card_btn)).check(matches(isDisplayed()))
         onView(withId(R.id.scan_card_btn)).perform(click())
         intending(
