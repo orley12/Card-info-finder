@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "102963447559",
+    "firebase_url": "https://card-info-finder.firebaseio.com",
+    "project_id": "card-info-finder",
+    "storage_bucket": "card-info-finder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102963447559:android:e1cc412147a2cea9ee27a2",
+        "android_client_info": {
+          "package_name": "com.example.cardinfofinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102963447559-as3e4a97a395gsr3je83qmpn645ip1rl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cardinfofinder",
+            "certificate_hash": "9017b526f089a494cd369d1c9238928a47ff6b3c"
+          }
+        },
+        {
+          "client_id": "102963447559-2l7q0puqlc76u3rmfhik5ubao0c01baa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQjKnzOSQ7Z4sgpT9ygR5Ia7Y0v9F7I-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102963447559-2l7q0puqlc76u3rmfhik5ubao0c01baa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
