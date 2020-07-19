@@ -42,7 +42,7 @@ object RepositoryImpl : Repository {
         })
     }
 
-    fun getCardInformation(): Card {
+    override fun getCardInformation(): Card {
         return cardInfo;
     }
 

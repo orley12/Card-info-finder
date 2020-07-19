@@ -3,7 +3,10 @@ package com.example.cardinfofinder.ui
 import android.app.Activity
 import android.app.Instrumentation
 import android.content.Intent
+import android.text.Editable
 import android.view.View
+import android.widget.EditText
+import androidx.lifecycle.Lifecycle
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -19,11 +22,14 @@ import androidx.test.espresso.intent.matcher.IntentMatchers.toPackage
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import androidx.test.filters.SmallTest
 import com.example.cardinfofinder.R
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
+import org.hamcrest.core.Is.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,12 +37,10 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest {
-
+class MainActivityEspressoTest {
+// Internet needed for test to pass
     @get:Rule
     var intentRule: IntentsTestRule<MainActivity> = IntentsTestRule(MainActivity::class.java)
-
-//    val scenario = launchActivity<MainActivity>()
 
     @Test
     fun clicking_scan_with_ocr_display_OcrCaptureActivity() {
@@ -95,6 +99,64 @@ class MainActivityTest {
             override fun perform(uiController: UiController, view: View) {
                 uiController.loopMainThreadForAtLeast(delay)
             }
+        }
+    }
+}
+
+@SmallTest
+@RunWith(AndroidJUnit4::class)
+class MainActivityTest {
+    @get:Rule
+    var activityScenarioRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
+
+    @Test
+    fun validCardNo_yields_true () {
+        val scenario = activityScenarioRule.scenario
+        scenario.onActivity { activity ->
+            val isValidCarResult = activity.isValidCard("378282246310005")
+            assertThat(isValidCarResult, `is`(true))
+        }
+    }
+
+    @Test
+    fun inValidCardNo_yields_true () {
+        val scenario = activityScenarioRule.scenario
+        scenario.onActivity { activity ->
+            val inValidCarResult = activity.isValidCard("2246310005")
+            assertThat(inValidCarResult, `is`(false))
+        }
+    }
+
+    @Test
+    fun onResume_called_progressBarVisibilityGone_proceedBtnVisibilityVisible(){
+        val scenario = activityScenarioRule.scenario
+        scenario.moveToState(Lifecycle.State.RESUMED)
+        scenario.onActivity { activity ->
+            assertThat(activity.progressBar.visibility
+                    , `is`(View.GONE))
+            assertThat(activity.proceedBtn.visibility, `is`(View.VISIBLE))
+        }
+    }
+
+    @Test
+    fun onCreate_called_progressBarVisibilityGone_proceedBtnVisibilityVisible(){
+        val scenario = activityScenarioRule.scenario
+        scenario.moveToState(Lifecycle.State.CREATED)
+        scenario.onActivity { activity ->
+            assertThat(activity.progressBar.visibility
+                    , `is`(View.GONE))
+            assertThat(activity.proceedBtn.visibility, `is`(View.VISIBLE))
+        }
+    }
+
+    @Test
+    fun getEditTextInput_called_returnsTextString(){
+        val scenario = activityScenarioRule.scenario
+        scenario.onActivity { activity ->
+            val cardNumber = "378282246310005"
+            val editText = EditText(activity.applicationContext)
+            editText.text = Editable.Factory.getInstance().newEditable(cardNumber)
+            assertThat(activity.getEditTextInput(editText), `is`(cardNumber))
         }
     }
 }

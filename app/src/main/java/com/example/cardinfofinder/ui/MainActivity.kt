@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         proceedBtn.setOnClickListener { gotoCardDetailActivity() }
     }
 
-    private fun getEditTextInput(editText: EditText): String {
+    fun getEditTextInput(editText: EditText): String {
         return editText.text.trim().toString()
     }
 
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, mRequestCode)
     }
 
-    private fun gotoCardDetailActivity() {
+    fun gotoCardDetailActivity() {
         val cardNumber: String = getEditTextInput(cardNumberEditText);
 
         if (isNetworkAvailable() && !cardNumber.isEmpty() && isValidCard(cardNumber)) {
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.GONE
     }
 
-    private fun isValidCard(cardNumber: String): Boolean {
+    fun isValidCard(cardNumber: String): Boolean {
         if (cardNumber.matches(Regex("^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})\$"))) {
             return true
         }
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isNetworkAvailable(): Boolean {
+    fun isNetworkAvailable(): Boolean {
         val connectivityManager: ConnectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).state == NetworkInfo.State.CONNECTED
