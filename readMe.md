@@ -1,6 +1,6 @@
 ## Resources
 
-[Download APK here](https://github.com/orley12/Card-info-finder/raw/master/apk/card-inf-finder.apk)
+[Download APK here](https://github.com/orley12/Card-info-finder/raw/master/card-info-finder.apk)
 
 ### What does this Application does?
 
